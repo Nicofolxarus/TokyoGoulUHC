@@ -24,6 +24,7 @@ public class EventsManager {
 		
 		//
 		pm.registerEvents(new WeatherManager(), pl);
+		pm.registerEvents(new StrengthNerf(), pl);
 	}
 
 }
