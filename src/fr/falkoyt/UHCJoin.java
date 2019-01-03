@@ -1,14 +1,15 @@
 package fr.falkoyt;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
+//import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Statistic;
+//import org.bukkit.Statistic;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,12 +18,14 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
+//import org.bukkit.scoreboard.DisplaySlot;
+//import org.bukkit.scoreboard.Objective;
+//import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
+import fr.falkoyt.scoreboards.ScoreBoardAPI;
+import fr.falkoyt.scoreboards.ScoreBoardAPI.ObjectifSideBar;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent.ChatSerializer;
 import net.minecraft.server.v1_8_R3.PacketPlayOutPlayerListHeaderFooter;
@@ -32,6 +35,17 @@ public class UHCJoin implements Listener {
 	static int Team;
 	static int task;
 	static int timer = 15;
+public static HashMap<UUID, ScoreBoardAPI> sclist = new HashMap<>();
+	
+	
+
+	public enum ScoreboardEnum {
+		ScUHC;
+	}
+	public String ColorFonce = "§4";
+	public String ColorClair = "§f";
+	public String ColorFonce1 = "§c";
+	public String ColorClair1 = "§f";
 
 	public static void sendTablist(Player p, String header, String footer) {
 		if (header == null)
@@ -58,6 +72,7 @@ public class UHCJoin implements Listener {
 	@EventHandler
 	public void join(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
+		
 
 		// LORSQUE UN JOUEUR REJOIN LA GAME
 		sendTablist(p, "§f>>[§cTokyo Ghoul UHC§f]<< \n§r   §8§l§m-----------------------------------------§r    \n",
@@ -65,11 +80,20 @@ public class UHCJoin implements Listener {
 		e.setJoinMessage("§f>> §4UHC §e" + p.getName() + " c'est connecté(e) !");
 		ScoreboardManager sb = Bukkit.getScoreboardManager();
 		Scoreboard board = sb.getNewScoreboard();
+		ScoreBoardAPI.updateObjectifHealth();
+		ScoreBoardAPI s = new ScoreBoardAPI();
+	
+		
+		ObjectifSideBar o = s.createObjectifSidebar(ColorFonce + "UHC", ScoreboardEnum.ScUHC);
+		o.addLine(6, "§8§m----»§r              §8§m«----");
+		o.addLine(5, "Joueurs");
+		
+	
 
-		Objective obj = board.registerNewObjective("Test", "dummy");
+/*		Objective obj = board.registerNewObjective("Test", "dummy");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 		obj.setDisplayName("§f>>[§4Tokyo Ghoul UHC§f]<<");
-
+		
 		Score Temps = obj.getScore("§8●§a Temps : §f" + timer);
 		Temps.setScore(3);
 		Score joueurs = obj.getScore("§8●§3 Joueurs : §f" + Bukkit.getOnlinePlayers().size());
@@ -85,9 +109,9 @@ public class UHCJoin implements Listener {
 		objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
 
 		Objective objective1 = board.registerNewObjective("§4❤", "health");
-		objective1.setDisplaySlot(DisplaySlot.BELOW_NAME);
+		objective1.setDisplaySlot(DisplaySlot.BELOW_NAME);*/
 
-		// On set les teams sur le scoreboard du joueur
+		 //On set les teams sur le scoreboard du joueur
 		for (org.bukkit.scoreboard.Team t : sb.getMainScoreboard().getTeams()) {
 			if (board.getTeam(t.getName()) == null) {
 				org.bukkit.scoreboard.Team newt = board.registerNewTeam(t.getName());
@@ -110,14 +134,15 @@ public class UHCJoin implements Listener {
 
 			ItemStack i = new ItemStack(Material.BANNER);
 			BannerMeta im = (BannerMeta) i.getItemMeta();
-			im.setDisplayName(ChatColor.GOLD + "Choisir son équipe");
+		im.setDisplayName(ChatColor.GOLD + "Choisir son équipe");
 			if (t != null)
-				im.setBaseColor(t.getDyecolor());
+				//im.setBaseColor(t.getDyecolor());
 			i.setItemMeta(im);
 			p.getInventory().setItem(4, i);
 		} else if (UHCMain.playerInGame.contains(p.getUniqueId())) {
-			p.setGameMode(GameMode.SPECTATOR);
+			//p.setGameMode(GameMode.SPECTATOR);
 		}
+		
 	}
 
 	@EventHandler

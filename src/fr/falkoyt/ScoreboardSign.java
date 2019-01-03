@@ -1,4 +1,4 @@
-//package fr.falkoyt;
+package fr.falkoyt;
 
 //import java.lang.reflect.Field;
 //import java.util.ArrayList;
@@ -18,9 +18,9 @@
 /**
  * @author zyuiop
  */
-/*public class ScoreboardSign {
-	*//**
-	 * This class is used to manage the content of a line. Advanced users can use it
+public class ScoreboardSign {
+	//**
+	 /* This class is used to manage the content of a line. Advanced users can use it
 	 * as they want, but they are encouraged to read and understand the code before
 	 * doing so. Use these methods at your own risk.
 	 *//*
@@ -390,4 +390,4 @@
 //
 //		return packet;
 //	}
-//}
+}
