@@ -9,10 +9,21 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scoreboard.DisplaySlot;
+
+import fr.falkoyt.scoreboards.ScoreBoardAPI;
 
 public class UHCMain extends JavaPlugin implements Plugin {
 
 	public static JavaPlugin pl;
+	public static UHCMain Instance;
+	public static HashMap<UUID, ScoreBoardAPI> sclist = new HashMap<>();
+	
+	
+
+	public enum ScoreboardEnum {
+		ScUHC;
+	}
 
 	public static HashMap<Player, Role> roles = new HashMap<>();
 	public static Timer timer = new Timer();
@@ -60,7 +71,21 @@ public class UHCMain extends JavaPlugin implements Plugin {
 
 	@Override
 	public void onDisable() {
-		super.onDisable();
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			ScoreBoardAPI s = sclist.get(p.getUniqueId());
+			s.deleteObjectiveSidebar(ScoreboardEnum.ScUHC);
+		}
+	}
+		
+		public void setScoreBoard(Player p) {
+			
+		ScoreBoardAPI s = new ScoreBoardAPI();
+		s.addObjective("Vie", "health", DisplaySlot.PLAYER_LIST);
+		s.addObjective("§4❤", "dummy", DisplaySlot.BELOW_NAME);
+		ScoreBoardAPI.updateObjectifHealth();
+			
+		
+		
 	}
 
 }
