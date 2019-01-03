@@ -64,9 +64,7 @@ public class ChoiceTeam implements Listener {
 									teamplayer.addPlayer(p);
 							}
 							p.setPlayerListName(team.getTeam().getPrefix() + p.getName() + ChatColor.RESET);
-							p.setDisplayName(Bukkit.getScoreboardManager().getMainScoreboard().getPlayerTeam(p)
-									.getPrefix() + p.getName()
-									+ Bukkit.getScoreboardManager().getMainScoreboard().getPlayerTeam(p).getSuffix());
+							p.setDisplayName(team.getTeam().getPrefix() + p.getName() + ChatColor.RESET);
 
 							ItemStack i = new ItemStack(Material.BANNER);
 							BannerMeta im = (BannerMeta) i.getItemMeta();

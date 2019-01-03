@@ -38,19 +38,19 @@ public class UHCJoin implements Listener {
 	static int Team;
 	static int task;
 	static int timer = 15;
-	public void onkill(PlayerDeathEvent e1)
-	{
-	String killed = e1.getEntity().getName();
-	String killer = e1.getEntity().getKiller().getName();
-	e1.setDeathMessage(ChatColor.RED + killed + " has been slain by " + killer);
+
+	public void onkill(PlayerDeathEvent e1) {
+		String killed = e1.getEntity().getName();
+		String killer = e1.getEntity().getKiller().getName();
+		e1.setDeathMessage(ChatColor.RED + killed + " has been slain by " + killer);
 	}
-public static HashMap<UUID, ScoreBoardAPI> sclist = new HashMap<>();
-	
-	
+
+	public static HashMap<UUID, ScoreBoardAPI> sclist = new HashMap<>();
 
 	public enum ScoreboardEnum {
 		ScUHC;
 	}
+
 	public String ColorFonce = "§4";
 	public String ColorClair = "§f";
 	public String ColorFonce1 = "§c";
@@ -79,88 +79,88 @@ public static HashMap<UUID, ScoreBoardAPI> sclist = new HashMap<>();
 			((CraftPlayer) p).getHandle().playerConnection.sendPacket(headerPacket);
 		}
 	}
-	
+
 	@EventHandler
 	public void join(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
 		for (Player p1 : Bukkit.getOnlinePlayers()) {
 			setScoreBoard(p1);
-			sendTablist(p1,"§8[§cTokyoGhoul§8]\n§r    §f§8§l§m---------------------------------------§r§f    \n","\n§r    §f§8§l§m---------------------------------------§r§f    \n");
+			sendTablist(p1, "§8[§cTokyoGhoul§8]\n§r    §f§8§l§m---------------------------------------§r§f    \n",
+					"\n§r    §f§8§l§m---------------------------------------§r§f    \n");
 			ScoreBoardAPI s = new ScoreBoardAPI();
 			s.addObjective("Vie", "health", DisplaySlot.PLAYER_LIST);
 			s.addObjective("§4❤", "dummy", DisplaySlot.BELOW_NAME);
 			ScoreBoardAPI.updateObjectifHealth();
-			
+
 			s.setScoreBoardPlayer(p1);
 			sclist.put(p1.getUniqueId(), s);
-		
-			
+
 		}
-		
+
 		for (Player p1 : Bukkit.getOnlinePlayers()) {
-		ScoreBoardAPI s = sclist.get(p1.getUniqueId());
-		ObjectifSideBar os = s.createObjectifSidebar(ColorFonce + "TokyoGhoul", ScoreboardEnum.ScUHC);
-		s.addObjective("kill", "totalkillcount", DisplaySlot.SIDEBAR);
-		
-		os.display();
-		if (os != null) {
-			os.addLine(14, "§8§m----§r     §7Temps        §8§m----");
-			os.addLine(13, "§4Pvp" +":§f" + UHCMain.timer.isPvp());
-			os.addLine(12, "§4Bordure");
-			os.addLine(13, "§4Roles");
-			os.addLine(12, "§8§m----§r     §7Stats        §8§m----");
-			os.addLine(11, "§4Team(s)" +":§f" + Team);
-			os.addLine(10, "§4Kill(s)" );
-			os.addLine(9, "§8§m----§r     §7Map        §8§m----");
-			os.addLine(8, "§4Centre");
-			os.addLine(7, "§4Taille");
-			
+			ScoreBoardAPI s = sclist.get(p1.getUniqueId());
+			ObjectifSideBar os = s.createObjectifSidebar(ColorFonce + "TokyoGhoul", ScoreboardEnum.ScUHC);
+			s.addObjective("kill", "totalkillcount", DisplaySlot.SIDEBAR);
+
 			os.display();
-			s.setScoreBoardPlayer(p1);
-			sclist.put(p1.getUniqueId(), s);
+			if (os != null) {
+				os.addLine(14, "§8§m----§r     §7Temps        §8§m----");
+				os.addLine(13, "§4Pvp" + ":§f" + UHCMain.timer.isPvp());
+				os.addLine(12, "§4Bordure");
+				os.addLine(13, "§4Roles");
+				os.addLine(12, "§8§m----§r     §7Stats        §8§m----");
+				os.addLine(11, "§4Team(s)" + ":§f" + Team);
+				os.addLine(10, "§4Kill(s)");
+				os.addLine(9, "§8§m----§r     §7Map        §8§m----");
+				os.addLine(8, "§4Centre");
+				os.addLine(7, "§4Taille");
+
+				os.display();
+				s.setScoreBoardPlayer(p1);
+				sclist.put(p1.getUniqueId(), s);
+			}
+
 		}
-	
-		}
-		
+
 		// LORSQUE UN JOUEUR REJOIN LA GAM
-		
-		//sendTablist(p, "§f>>[§cTokyo Ghoul UHC§f]<< \n§r   §8§l§m-----------------------------------------§r    \n",
-				//"\n§r    §8§l§m-----------------------------------------§r    \n");
+
+		// sendTablist(p, "§f>>[§cTokyo Ghoul UHC§f]<< \n§r
+		// §8§l§m-----------------------------------------§r \n",
+		// "\n§r §8§l§m-----------------------------------------§r \n");
 		e.setJoinMessage("§f>> §4UHC §e" + p.getName() + " c'est connecté(e) !");
 		ScoreboardManager sb = Bukkit.getScoreboardManager();
 		Scoreboard board = sb.getNewScoreboard();
-		//ScoreBoardAPI.updateObjectifHealth();
-	//	ScoreBoardAPI s = new ScoreBoardAPI();
-	
-		
-		//ObjectifSideBar o = s.createObjectifSidebar(ColorFonce + "UHC", ScoreboardEnum.ScUHC);
-		//o.addLine(6, "§8§m----»§r              §8§m«----");
-		//o.addLine(5, "Joueurs");
-		
-	
+		// ScoreBoardAPI.updateObjectifHealth();
+		// ScoreBoardAPI s = new ScoreBoardAPI();
 
-/*		Objective obj = board.registerNewObjective("Test", "dummy");
-		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-		obj.setDisplayName("§f>>[§4Tokyo Ghoul UHC§f]<<");
-		
-		Score Temps = obj.getScore("§8●§a Temps : §f" + timer);
-		Temps.setScore(3);
-		Score joueurs = obj.getScore("§8●§3 Joueurs : §f" + Bukkit.getOnlinePlayers().size());
-		joueurs.setScore(5);
+		// ObjectifSideBar o = s.createObjectifSidebar(ColorFonce + "UHC",
+		// ScoreboardEnum.ScUHC);
+		// o.addLine(6, "§8§m----»§r §8§m«----");
+		// o.addLine(5, "Joueurs");
 
-		Score équipes = obj.getScore("§8●§a Equipes : §f" + Team);
-		équipes.setScore(4);
+		/*
+		 * Objective obj = board.registerNewObjective("Test", "dummy");
+		 * obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+		 * obj.setDisplayName("§f>>[§4Tokyo Ghoul UHC§f]<<");
+		 * 
+		 * Score Temps = obj.getScore("§8●§a Temps : §f" + timer); Temps.setScore(3);
+		 * Score joueurs = obj.getScore("§8●§3 Joueurs : §f" +
+		 * Bukkit.getOnlinePlayers().size()); joueurs.setScore(5);
+		 * 
+		 * Score équipes = obj.getScore("§8●§a Equipes : §f" + Team);
+		 * équipes.setScore(4);
+		 * 
+		 * Score kill = obj.getScore("§8●§4 Kills :§f " +
+		 * p.getStatistic(Statistic.PLAYER_KILLS)); kill.setScore(2);
+		 * 
+		 * Objective objective = board.registerNewObjective("Vie", "health");
+		 * objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
+		 * 
+		 * Objective objective1 = board.registerNewObjective("§4❤", "health");
+		 * objective1.setDisplaySlot(DisplaySlot.BELOW_NAME);
+		 */
 
-		Score kill = obj.getScore("§8●§4 Kills :§f " + p.getStatistic(Statistic.PLAYER_KILLS));
-		kill.setScore(2);
-
-		Objective objective = board.registerNewObjective("Vie", "health");
-		objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
-
-		Objective objective1 = board.registerNewObjective("§4❤", "health");
-		objective1.setDisplaySlot(DisplaySlot.BELOW_NAME);*/
-
-		 //On set les teams sur le scoreboard du joueur
+		// On set les teams sur le scoreboard du joueur
 		for (org.bukkit.scoreboard.Team t : sb.getMainScoreboard().getTeams()) {
 			if (board.getTeam(t.getName()) == null) {
 				org.bukkit.scoreboard.Team newt = board.registerNewTeam(t.getName());
@@ -172,7 +172,7 @@ public static HashMap<UUID, ScoreBoardAPI> sclist = new HashMap<>();
 			}
 		}
 
-		//p.setScoreboard(s);
+		// p.setScoreboard(s);
 		if (UHCState.isState(UHCState.WAIT)) {
 			if (!UHCMain.playerInGame.contains(p.getUniqueId())) {
 				UHCMain.playerInGame.add(p.getUniqueId());
@@ -183,7 +183,7 @@ public static HashMap<UUID, ScoreBoardAPI> sclist = new HashMap<>();
 
 			ItemStack i = new ItemStack(Material.BANNER);
 			BannerMeta im = (BannerMeta) i.getItemMeta();
-		im.setDisplayName(ChatColor.GOLD + "Choisir son équipe");
+			im.setDisplayName(ChatColor.GOLD + "Choisir son équipe");
 			if (t != null)
 				im.setBaseColor(t.getDyecolor());
 			i.setItemMeta(im);
@@ -191,7 +191,7 @@ public static HashMap<UUID, ScoreBoardAPI> sclist = new HashMap<>();
 		} else if (UHCMain.playerInGame.contains(p.getUniqueId())) {
 			p.setGameMode(GameMode.SPECTATOR);
 		}
-		
+
 	}
 
 	private void setScoreBoard(Player p1) {
@@ -201,10 +201,8 @@ public static HashMap<UUID, ScoreBoardAPI> sclist = new HashMap<>();
 		ScoreBoardAPI.updateObjectifHealth();
 		s.setScoreBoardPlayer(p1);
 		sclist.put(p1.getUniqueId(), s);
-	
-	
+
 	}
-	
 
 	@EventHandler
 	public void quit(PlayerQuitEvent e) {
