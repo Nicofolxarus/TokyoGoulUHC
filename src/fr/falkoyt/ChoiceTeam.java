@@ -42,6 +42,9 @@ public class ChoiceTeam implements Listener {
 	@EventHandler
 	public void ChoiceTeamEvent(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();
+		if(e.getInventory() == null)
+			return;
+		
 		if (e.getInventory().getName().equals(NomInventaire)) {
 			if (e.getCurrentItem().getType() == Material.BANNER) {
 				BannerMeta banner = (BannerMeta) e.getCurrentItem().getItemMeta();
