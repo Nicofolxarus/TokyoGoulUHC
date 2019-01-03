@@ -21,7 +21,7 @@ public class Commanduhcrevive implements CommandExecutor {
 		if (p == null)
 			return false;
 
-		Bukkit.broadcastMessage(ChatColor.GOLD + ">>UHC §4 " + p.getCustomName() + " §3 A été REVIVE");
+		Bukkit.broadcastMessage(ChatColor.GOLD + ">>UHC §4 " + p.getDisplayName() + " §3 A été REVIVE");
 		new WorldSounds(((Player) p).getLocation()).playSound(Sound.AMBIENCE_THUNDER);
 		UHCrevive.revive(p);
 		return true;

@@ -44,6 +44,7 @@ public class UHCMain extends JavaPlugin implements Plugin {
 
 	// LORSQUE LE PLUGIN SALLUME
 	public void onEnable() {
+		Bukkit.getWorlds().get(0).setGameRuleValue("naturalRegeneration", "false");
 		// ON REGISTER TOUT LES LISTENERS
 		EventsManager.registerEvents(this);
 		getCommand("uhcstart").setExecutor(new CommanduhcStart());

@@ -22,30 +22,29 @@ public class UHCPvP implements Listener {
 	@EventHandler
 	public void fakeDamageDeath(EntityDamageEvent e) {
 
-		if (UHCState.isState(UHCState.WAIT) || UHCState.isState(UHCState.WAIT)) {
+		if (UHCState.isState(UHCState.WAIT)) {
 			e.setCancelled(true);
 		}
 
 	}
 
-	private void fakeDeath(Player p) {
+	@EventHandler
+	public void onDeath(PlayerDeathEvent e) {
+		Player p = (Player) e.getEntity();
+		e.setDeathMessage("§7>> §bUHC§4 " + p.getName() + " est éliminé !");
+		fakeDeath(p);
+		UHCEndGame.checkWin();
+	}
 
+	private void fakeDeath(Player p) {
 		respawnInstant(p);
 		p.setGameMode(GameMode.SPECTATOR);
-		Bukkit.broadcastMessage("§7>> §bUHC§4 " + p.getName() + " est éliminé !");
 		UHCMain.playerInGame.remove(p.getUniqueId());
 		new WorldSounds(p.getLocation()).playSound(Sound.WITHER_SPAWN);
 		UHCSkullRegen.dropSkull(p);
 		p.getFlySpeed();
 		p.getOpenInventory();
 
-	}
-
-	@EventHandler
-	public void fakeDeath(PlayerDeathEvent e) {
-		Player p = (Player) e.getEntity();
-		fakeDeath(p);
-		UHCEndGame.checkWin();
 	}
 
 	private void respawnInstant(final Player player) {
