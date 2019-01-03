@@ -1,7 +1,7 @@
 name: UHC
 version: 1.0
 author: FalkoYT
-main: fr.falkoyt.UHCMain
+main: fr.falkoyt.Main.UHCMain
 commands:
   uhcstart:
    description: Cette commande permet de start la partie.
