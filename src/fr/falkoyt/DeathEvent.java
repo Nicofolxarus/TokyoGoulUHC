@@ -29,7 +29,7 @@ public class DeathEvent implements Listener {
 
 		Player playerkiller = (Player) e.getDamager();
 
-		kills.put(playerkiller, kills.get(playerkiller) + 1);
+		kills.put(playerkiller, (kills.get(playerkiller) == null ? 0 : kills.get(playerkiller)) + 1);
 
 		ScoreBoardAPI s = UHCJoin.sclist.get(playerkiller.getUniqueId());
 		ObjectifSideBar os = s.createObjectifSidebar("§4" + "TokyoGhoul", ScoreboardEnum.ScUHC);

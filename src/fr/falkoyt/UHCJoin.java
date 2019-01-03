@@ -104,16 +104,16 @@ public class UHCJoin implements Listener {
 
 			os.display();
 			if (os != null) {
-				os.addLine(14, "§8§m----§r     §7Temps        §8§m----");
-				os.addLine(13, "§4Pvp" + ":§f" + UHCMain.timer.isPvp());
-				os.addLine(12, "§4Bordure");
-				os.addLine(13, "§4Roles");
-				os.addLine(12, "§8§m----§r     §7Stats        §8§m----");
-				os.addLine(11, "§4Team(s)" + ":§f" + Team);
-				os.addLine(10, "§4Kill(s)");
-				os.addLine(9, "§8§m----§r     §7Map        §8§m----");
-				os.addLine(8, "§4Centre");
-				os.addLine(7, "§4Taille");
+//				os.addLine(14, "§8§m----§r     §7Temps        §8§m----");
+//				os.addLine(13, "§4Pvp" + ":§f" + UHCMain.timer.isPvp());
+//				os.addLine(12, "§4Bordure");
+//				os.addLine(13, "§4Roles");
+//				os.addLine(12, "§8§m----§r     §7Stats        §8§m----");
+//				os.addLine(11, "§4Team(s)" + ":§f" + Team);
+//				os.addLine(10, "§4Kill(s)");
+//				os.addLine(9, "§8§m----§r     §7Map        §8§m----");
+//				os.addLine(8, "§4Centre");
+//				os.addLine(7, "§4Taille");
 
 				os.display();
 				s.setScoreBoardPlayer(p1);
