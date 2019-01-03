@@ -24,11 +24,9 @@ public class UHCPvP implements Listener {
 
 	@EventHandler
 	public void fakeDamageDeath(EntityDamageEvent e) {
-
 		if (UHCState.isState(UHCState.WAIT)) {
 			e.setCancelled(true);
 		}
-
 	}
 
 	@EventHandler

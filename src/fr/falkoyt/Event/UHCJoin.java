@@ -9,7 +9,6 @@ import org.bukkit.GameMode;
 //import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Statistic;
 //import org.bukkit.Statistic;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
@@ -39,9 +38,7 @@ import net.minecraft.server.v1_8_R3.PacketPlayOutPlayerListHeaderFooter;
 
 public class UHCJoin implements Listener {
 
-	static int Team;
 	static int task;
-	static int timer = 15;
 
 	public void onkill(PlayerDeathEvent e1) {
 		String killed = e1.getEntity().getName();
@@ -96,12 +93,12 @@ public class UHCJoin implements Listener {
 		Objective obj = board.registerNewObjective("UHC", "dummy");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 		obj.setDisplayName("§f>>[§4Tokyo Ghoul UHC§f]<<");
-
-		obj.getScore("§8●§3 Joueurs : §f" + Bukkit.getOnlinePlayers().size()).setScore(5);
-		obj.getScore("§8●§a Equipes : §f" + Team).setScore(4);
-		obj.getScore("§8●§a Temps : §f" + timer).setScore(3);
-		obj.getScore("§8●§a Temps Role : §f" + timer).setScore(2);
-		obj.getScore("§8●§4 Kills :§f " + p.getStatistic(Statistic.PLAYER_KILLS)).setScore(1);
+		
+		obj.getScore("§8●§3 Joueurs : §f" + UHCMain.playerInGame.size()).setScore(5);
+		obj.getScore("§8●§a Equipes : §fAucune").setScore(4);
+		obj.getScore("§8●§a Temps : §f--").setScore(3);
+		obj.getScore("§8●§a Temps Role : §f--").setScore(2);
+		obj.getScore("§8●§4 Kills :§f 0").setScore(1);
 
 		Objective objective = board.registerNewObjective("Vie", "health");
 		objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);

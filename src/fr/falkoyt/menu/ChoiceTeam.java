@@ -17,6 +17,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
 import fr.falkoyt.Teams.Team;
@@ -69,14 +71,25 @@ public class ChoiceTeam implements Listener {
 							}
 							p.setPlayerListName(team.getTeam().getPrefix() + p.getName() + ChatColor.RESET);
 							p.setDisplayName(team.getTeam().getPrefix() + p.getName() + ChatColor.RESET);
-
+							
+							String newligne = "§8●§a Equipes : §f" + team.getTeam().getPrefix()+team.getName();
+							Scoreboard board = p.getScoreboard();
+							Objective objective = board.getObjective(DisplaySlot.SIDEBAR);
+							
+							for (String ligne : board.getEntries()) {
+								if (ligne.contains("Equipes")) {
+									board.resetScores(ligne);
+									objective.getScore(newligne).setScore(1);
+									break;
+								}
+							}
+							
 							ItemStack i = new ItemStack(Material.BANNER);
 							BannerMeta im = (BannerMeta) i.getItemMeta();
 							im.setDisplayName(ChatColor.GOLD + "Choisir son équipe");
 							im.setBaseColor(banner.getBaseColor());
 							i.setItemMeta(im);
 							p.getInventory().setItem(4, i);
-
 						} else {
 							p.sendMessage(ChatColor.RED + "Cette équipe est complète !");
 						}
