@@ -20,6 +20,7 @@ public class EventsManager {
 		pm.registerEvents(new UHCListener(), pl);
 		pm.registerEvents(new UHCAutoLeafDecay(), pl);
 		pm.registerEvents(new ChoiceTeam(), pl);
+		pm.registerEvents(new DeathEvent(), pl);
 		
 		
 		//
