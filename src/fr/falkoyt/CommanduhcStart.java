@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class CommanduhcStart implements CommandExecutor {
 
@@ -12,6 +13,10 @@ public class CommanduhcStart implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cdm, String msg, String[] args) {
 		if(args.length != 0)
 			return false;
+		
+		if(sender instanceof Player)
+			if(!((Player) sender).isOp())
+				return false;
 		
 		Bukkit.broadcastMessage(ChatColor.AQUA + ">>UHC §4 Vous avez été téléporté avec succès !!!");
 		UHCGame.start();

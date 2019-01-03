@@ -20,6 +20,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.DisplaySlot;
 //import org.bukkit.scoreboard.DisplaySlot;
 //import org.bukkit.scoreboard.Objective;
@@ -174,6 +176,8 @@ public class UHCJoin implements Listener {
 
 		// p.setScoreboard(s);
 		if (UHCState.isState(UHCState.WAIT)) {
+			p.setGameMode(GameMode.ADVENTURE);
+			p.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 120, 20));
 			if (!UHCMain.playerInGame.contains(p.getUniqueId())) {
 				UHCMain.playerInGame.add(p.getUniqueId());
 			}
