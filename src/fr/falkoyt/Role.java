@@ -25,7 +25,7 @@ public class Role {
 	private static ItemStack initbooksharp() {
 		ItemStack booksharp = new ItemStack(Material.ENCHANTED_BOOK);
 		EnchantmentStorageMeta mbooksharp = (EnchantmentStorageMeta) booksharp.getItemMeta();
-		mbooksharp.addEnchant(Enchantment.DAMAGE_ALL, 3, false);
+		mbooksharp.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
 		booksharp.setItemMeta(mbooksharp);
 		return booksharp;
 	}
@@ -33,7 +33,7 @@ public class Role {
 	private static ItemStack initbookprotec() {
 		ItemStack bookprotec = new ItemStack(Material.ENCHANTED_BOOK);
 		EnchantmentStorageMeta mbookprotec = (EnchantmentStorageMeta) bookprotec.getItemMeta();
-		mbookprotec.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, false);
+		mbookprotec.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
 		bookprotec.setItemMeta(mbookprotec);
 		return bookprotec;
 	}

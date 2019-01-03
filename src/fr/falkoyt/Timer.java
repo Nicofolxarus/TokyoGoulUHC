@@ -18,12 +18,17 @@ public class Timer {
 					if (days == 2) {
 						UHCState.setState(UHCState.GAMEPVP);
 						pvp = true;
+						Bukkit.broadcastMessage("pvp activer");
 					}
-					if (days == 5)
+					if (days == 5) {
 						UHCMain.border.mouveborder();
+						Bukkit.broadcastMessage("border move");
+					}
 				} else if (seconde % (10 * 60) == 0) {
-					if (days == 2)
-						Role.RolesAtributions();
+					if (days == 1) {
+						Bukkit.broadcastMessage("roles set");
+						Role.RolesAtributions();	
+					}
 					Role.GiveRoleEffect();
 				}
 			}
