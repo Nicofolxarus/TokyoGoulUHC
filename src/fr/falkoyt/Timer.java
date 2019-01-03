@@ -14,6 +14,9 @@ public class Timer {
 				seconde++;
 				if (seconde % (20 * 60) == 0) {
 					days++;
+					if (days == 2) {
+						// actiation du pvp
+					}
 					if (days == 5)
 						UHCMain.border.mouveborder();
 				} else if (seconde % (10 * 60) == 0) {
