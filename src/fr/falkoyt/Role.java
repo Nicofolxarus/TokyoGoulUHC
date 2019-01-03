@@ -87,14 +87,13 @@ public class Role {
 	public void giveEffect(Player player) {
 		switch (rt) {
 		case Goul_Borgne:
-			player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 12000, 0, true));
-			player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 12000, 0, true));
+			player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 12000, 0, false));
 			break;
 		case Goul:
-			player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 12000, 0, true));
+			player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 12000, 0, false));
 			break;
 		case Policier:
-			player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 12000, 0, true));
+			player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 12000, 0, false));
 			break;
 
 		default:
