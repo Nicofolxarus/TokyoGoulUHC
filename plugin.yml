@@ -1,0 +1,11 @@
+name: UHC
+version: 1.0
+author: FalkoYT
+main: fr.falkoyt.UHCMain
+commands:
+  uhcstart:
+   description: Cette commande permet de start la partie.
+  kit:
+   description: Cette commande permet de recuperer sont Kit la partie.
+  revive:
+   description: Cette commande permet de revive un joueur de la partie.
