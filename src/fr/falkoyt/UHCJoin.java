@@ -26,7 +26,6 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
-
 import fr.falkoyt.scoreboards.ScoreBoardAPI;
 import fr.falkoyt.scoreboards.ScoreBoardAPI.ObjectifSideBar;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
@@ -95,7 +94,7 @@ public static HashMap<UUID, ScoreBoardAPI> sclist = new HashMap<>();
 		os.display();
 		if (os != null) {
 			os.addLine(14, "§8§m----»§r     §7Temps        §8§m«----");
-			os.addLine(13, "§3Pvp"  );
+			os.addLine(13, "§3Pvp"  + UHCMain.timer.isPvp());
 			os.addLine(12, "§3Bordure");
 			os.addLine(13, "§3Roles");
 			os.addLine(12, "§8§m----»§r     §7Stats        §8§m«----");

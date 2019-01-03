@@ -6,6 +6,7 @@ public class Timer {
 
 	private long seconde = 0;
 	private int days = 0;
+	private boolean pvp = false;
 
 	public void startTimer() {
 		Bukkit.getScheduler().runTaskTimer(UHCMain.pl, new Runnable() {
@@ -15,7 +16,8 @@ public class Timer {
 				if (seconde % (20 * 60) == 0) {
 					days++;
 					if (days == 2) {
-						// actiation du pvp
+						UHCState.setState(UHCState.GAMEPVP);
+						pvp = true;
 					}
 					if (days == 5)
 						UHCMain.border.mouveborder();
@@ -27,4 +29,17 @@ public class Timer {
 			}
 		}, 20, 20);
 	}
+
+	public long getSeconde() {
+		return seconde;
+	}
+
+	public int getDays() {
+		return days;
+	}
+
+	public boolean isPvp() {
+		return pvp;
+	}
+
 }
