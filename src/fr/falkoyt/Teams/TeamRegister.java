@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 public class TeamRegister {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -19,6 +20,9 @@ public class TeamRegister {
 	public static void Initialisation() {
 		for (org.bukkit.scoreboard.Team team : Bukkit.getScoreboardManager().getMainScoreboard().getTeams()) {
 			team.unregister();
+		}
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			p.getScoreboard().getTeams().forEach(t -> t.unregister());
 		}
 		teams.clear();
 		teams.add(new Team(1, "Cyan", ChatColor.DARK_AQUA, DyeColor.CYAN));
@@ -77,6 +81,9 @@ public class TeamRegister {
 	public void update() {
 		for (org.bukkit.scoreboard.Team team : Bukkit.getScoreboardManager().getMainScoreboard().getTeams()) {
 			team.unregister();
+		}
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			p.getScoreboard().getTeams().forEach(t -> t.unregister());
 		}
 		teams.clear();
 		teams.add(new Team(1, "Cyan", ChatColor.DARK_AQUA, DyeColor.CYAN));

@@ -28,7 +28,6 @@ public class EventsManager {
 		pm.registerEvents(new DeathEvent(), pl);
 		
 		
-		//
 		pm.registerEvents(new WeatherManager(), pl);
 		pm.registerEvents(new StrengthNerf(), pl);
 	}

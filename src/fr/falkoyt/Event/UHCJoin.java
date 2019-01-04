@@ -55,37 +55,41 @@ public class UHCJoin implements Listener {
 	public String ColorFonce1 = "§c";
 	public String ColorClair1 = "§f";
 
-	public static void sendTablist(Player p, String header, String footer) {
-		if (!p.isOnline())
-			return;
-		if (header == null)
-			header = "";
-		if (footer == null)
-			footer = "";
-
-		IChatBaseComponent tabHeader = ChatSerializer.a("{\"text\":\"" + header + "\"}");
-		IChatBaseComponent tabFooter = ChatSerializer.a("{\"text\":\"" + footer + "\"}");
-
-		PacketPlayOutPlayerListHeaderFooter headerPacket = new PacketPlayOutPlayerListHeaderFooter(tabHeader);
-
-		try {
-			Field field = headerPacket.getClass().getDeclaredField("b");
-			field.setAccessible(true);
-			field.set(headerPacket, tabFooter);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			((CraftPlayer) p).getHandle().playerConnection.sendPacket(headerPacket);
-		}
-	}
-
 	@EventHandler
 	public void join(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
 		// LORSQUE UN JOUEUR REJOIN LA GAM
 
-		sendTablist(p, "§f>>[§cTokyo Ghoul UHC§f]<< \n§r		 §8§l§m-----------------------------------------§r \n","\n§r §8§l§m-----------------------------------------§r \n");
+		sendTablist(p, "§f>>[§cTokyo Ghoul UHC§f]<< \n§r §8§l§m-----------------------------------------§r \n","\n§r §8§l§m-----------------------------------------§r \n");
 		e.setJoinMessage("§f>> §4UHC §e" + p.getName() + " c'est connecté(e) !");
+
+
+		// p.setScoreboard(s);
+		if (UHCState.isState(UHCState.WAIT)) {
+			p.setGameMode(GameMode.ADVENTURE);
+			p.setDisplayName(p.getName());
+			p.setCustomName(p.getName());
+			p.getInventory().setArmorContents(null);
+			p.getInventory().clear();
+			p.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 2, 1));
+			if (!UHCMain.playerInGame.contains(p.getUniqueId())) {
+				UHCMain.playerInGame.add(p.getUniqueId());
+			}
+			p.teleport(new Location(p.getWorld(), 0, 201, 0));
+			
+			Team t = fr.falkoyt.Teams.Team.getTeam(p);
+
+			ItemStack i = new ItemStack(Material.BANNER);
+			BannerMeta im = (BannerMeta) i.getItemMeta();
+			im.setDisplayName(ChatColor.GOLD + "Choisir son équipe");
+			if (t != null)
+				im.setBaseColor(t.getDyecolor());
+			i.setItemMeta(im);
+			p.getInventory().setItem(4, i);
+		} else if (!UHCMain.playerInGame.contains(p.getUniqueId())) {
+			p.setGameMode(GameMode.SPECTATOR);
+		}
+		
 		ScoreboardManager sb = Bukkit.getScoreboardManager();
 		Scoreboard board = sb.getNewScoreboard();
 
@@ -119,30 +123,6 @@ public class UHCJoin implements Listener {
 				}
 			}
 		}
-
-		// p.setScoreboard(s);
-		if (UHCState.isState(UHCState.WAIT)) {
-			p.setGameMode(GameMode.ADVENTURE);
-			p.setDisplayName(p.getName());
-			p.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 120, 20));
-			if (!UHCMain.playerInGame.contains(p.getUniqueId())) {
-				UHCMain.playerInGame.add(p.getUniqueId());
-			}
-			p.teleport(new Location(p.getWorld(), 0, 201, 0));
-
-			Team t = fr.falkoyt.Teams.Team.getTeam(p);
-
-			ItemStack i = new ItemStack(Material.BANNER);
-			BannerMeta im = (BannerMeta) i.getItemMeta();
-			im.setDisplayName(ChatColor.GOLD + "Choisir son équipe");
-			if (t != null)
-				im.setBaseColor(t.getDyecolor());
-			i.setItemMeta(im);
-			p.getInventory().setItem(4, i);
-		} else if (UHCMain.playerInGame.contains(p.getUniqueId())) {
-			p.setGameMode(GameMode.SPECTATOR);
-		}
-
 	}
 
 	@EventHandler
@@ -165,5 +145,28 @@ public class UHCJoin implements Listener {
 			pl.setLevel(timer);
 		}
 	}
+	
+	public static void sendTablist(Player p, String header, String footer) {
+		if (!p.isOnline())
+			return;
+		if (header == null)
+			header = "";
+		if (footer == null)
+			footer = "";
 
+		IChatBaseComponent tabHeader = ChatSerializer.a("{\"text\":\"" + header + "\"}");
+		IChatBaseComponent tabFooter = ChatSerializer.a("{\"text\":\"" + footer + "\"}");
+
+		PacketPlayOutPlayerListHeaderFooter headerPacket = new PacketPlayOutPlayerListHeaderFooter(tabHeader);
+
+		try {
+			Field field = headerPacket.getClass().getDeclaredField("b");
+			field.setAccessible(true);
+			field.set(headerPacket, tabFooter);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			((CraftPlayer) p).getHandle().playerConnection.sendPacket(headerPacket);
+		}
+	}
 }

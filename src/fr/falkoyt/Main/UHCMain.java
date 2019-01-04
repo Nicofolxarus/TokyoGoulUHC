@@ -44,7 +44,6 @@ public class UHCMain extends JavaPlugin implements Plugin {
 	@Override
 	public void onLoad() {
 		pl = this;
-		super.onLoad();
 	}
 
 	// IL SAGIT DE LA LISTE DES JOUEURS EN JEU
@@ -60,30 +59,25 @@ public class UHCMain extends JavaPlugin implements Plugin {
 		int Seconde = (seconde - ((20 * Episode) * 60)) % 60;
 		return Minute + "min " + Seconde + "s";
 	}
-
-	public int getPlayersPerTeam() {
-		return 0;
-	}
-
+	
 	// LORSQUE LE PLUGIN SALLUME
 	public void onEnable() {
-		Bukkit.getWorlds().get(0).setGameRuleValue("naturalRegeneration", "false");
+		Bukkit.getWorlds().forEach(w -> w.setGameRuleValue("naturalRegeneration", "false"));
 		// ON REGISTER TOUT LES LISTENERS
+		TeamRegister.Initialisation();
 		EventsManager.registerEvents(this);
 		getCommand("uhcstart").setExecutor(new CommanduhcStart());
 		getCommand("kit").setExecutor(new CommanduhcKit());
 		getCommand("revive").setExecutor(new Commanduhcrevive());
-		TeamRegister.Initialisation();
 		UHCState.setState(UHCState.WAIT);
 		Flying_Spawn.create();
 		for (Player p : Bukkit.getOnlinePlayers())
 			Bukkit.getPluginManager().callEvent(new PlayerJoinEvent(p, null));
-		super.onEnable();
 	}
 
 	@Override
 	public void onDisable() {
-		
+		Bukkit.getOnlinePlayers().forEach(p -> p.setPlayerListName(p.getName()));
 	}
 }
 		
