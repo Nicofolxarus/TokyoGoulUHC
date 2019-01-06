@@ -50,19 +50,34 @@ public class Role {
 	public void displayMessage(Player player) {
 		switch (rt) {
 		case Goul_Borgne:
-			player.sendMessage("Bonne Nouvelle tu et une Ghoul Borgne tu obptiendras ton kit en tappant /kit !!!!");
+			player.sendMessage(
+					"§8§l§m§4=====================================================================================================================================");
+			player.sendMessage(
+					"§e Bonne Nouvelle tu et une Ghoul Borgne tu obptiendras ton kit en tappant /kit !!!! Ton but et de gagner avec La Ghoul de ton équipe. ");
+			player.sendMessage(
+					"§8§l§m§4=====================================================================================================================================");
 			break;
 
 		case Goul:
-			player.sendMessage("Attention tu et Une Ghoul, obtient ton kit en tappant /kit !!!");
+			player.sendMessage(
+					"§8§l§m§4=====================================================================================================================================");
+			player.sendMessage(
+					"§e Attention tu et Une Ghoul, obtient ton kit en tappant /kit !!! Ton but et de win avecc la ghoul borgne de ton équipe");
+			player.sendMessage(
+					"§8§l§m§4=====================================================================================================================================");
 			break;
+
 		case Policier:
-			player.sendMessage("Bravo tu est devenue POLICIER. en faisant /kit tu obtient ton kit !! ");
+			player.sendMessage(
+					"§8§l§m§4=====================================================================================================================================");
+			player.sendMessage(
+					"§e Bravo tu est devenue POLICIER. en faisant /kit tu obtient ton kit !! Tu doit trouver les Ghouls de ton équipe et les tuers !!!  ");
+			player.sendMessage(
+					"§8§l§m§4=====================================================================================================================================");
 			break;
 		default:
 			break;
 		}
-
 	}
 
 	public boolean giveItem(Player player) {

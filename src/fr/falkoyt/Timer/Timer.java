@@ -13,14 +13,13 @@ public class Timer {
 	private int seconde = 0;
 	private int days = 0;
 	private boolean pvp = false;
-	private boolean roleGive = false;
+	public boolean roleGive = false;
 	
 	public void startTimer() {
 		Bukkit.getScheduler().runTaskTimer(UHCMain.pl, new Runnable() {
 			@Override
 			public void run() {
 				seconde++;
-				
 				if(!roleGive) {
 					Bukkit.getOnlinePlayers().forEach(p -> {
 						String newligne = "§8●§a Temps Role : §f" + (((30*60)-seconde <= 0) ? "§aOn" : timeToString((30*60)-seconde));
@@ -49,12 +48,10 @@ public class Timer {
 						UHCMain.border.mouveborder();
 						Bukkit.broadcastMessage("§f>> §4UHC §aBorder en Mouvement");
 					}
-				} else if (seconde % (10 * 60) == 0) {
-					if (days == 1) {
-						Bukkit.broadcastMessage("§f>> §4UHC §aLes Roles ont été attribué");
-						Role.RolesAtributions();
-						roleGive = true;
-					}
+				} else if (seconde % (10 * 60) == 0 && days == 1 && !roleGive) {
+					Bukkit.broadcastMessage("§f>> §4UHC §aLes Roles ont été attribué");
+					Role.RolesAtributions();
+					roleGive = true;
 					Role.GiveRoleEffect();
 				}
 				

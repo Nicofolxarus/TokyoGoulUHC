@@ -55,7 +55,7 @@ public class ChoiceTeam implements Listener {
 
 			if (e.getCurrentItem() == null)
 				return;
-
+				
 			if (e.getCurrentItem().getType() == Material.BANNER) {
 				BannerMeta banner = (BannerMeta) e.getCurrentItem().getItemMeta();
 				for (Team team : TeamRegister.getregisteredTeams()) {
@@ -125,6 +125,7 @@ public class ChoiceTeam implements Listener {
 		stack.setItemMeta(meta);
 
 		inv.setItem(8, stack);
+		
 		p.openInventory(inv);
 	}
 

@@ -16,12 +16,12 @@ public class CommanduhcKit implements CommandExecutor {
 
 		if (sender instanceof Player) {
 			if (args.length != 0) {
-				sender.sendMessage("What are you doing ??");
+				sender.sendMessage(">>UHC §4Veuillez utiliser la commande /kit");
 				return false;
 			}
 
 			if (UHCMain.roles.isEmpty()) {
-				sender.sendMessage("You can't get your kit now");
+				sender.sendMessage(">>UHC §4Les Roles ne sont pas encore défini");
 				return false;
 			}
 
