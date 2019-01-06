@@ -65,6 +65,7 @@ public class UHCMain extends JavaPlugin implements Plugin {
 		Bukkit.getWorlds().forEach(w -> w.setGameRuleValue("naturalRegeneration", "false"));
 		// ON REGISTER TOUT LES LISTENERS
 		TeamRegister.Initialisation();
+		Role.initBook();
 		EventsManager.registerEvents(this);
 		getCommand("uhcstart").setExecutor(new CommanduhcStart());
 		getCommand("kit").setExecutor(new CommanduhcKit());

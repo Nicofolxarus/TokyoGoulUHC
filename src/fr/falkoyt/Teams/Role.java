@@ -21,23 +21,19 @@ public class Role {
 		Goul_Borgne, Goul, Policier;
 	}
 
-	private static final ItemStack booksharp = initbooksharp();
-	private static final ItemStack bookprotec = initbookprotec();
+	private static ItemStack booksharp;
+	private static ItemStack bookprotec;
 
-	private static ItemStack initbooksharp() {
-		ItemStack booksharp = new ItemStack(Material.ENCHANTED_BOOK);
+	public static void initBook() {
+		booksharp  = new ItemStack(Material.ENCHANTED_BOOK);
 		EnchantmentStorageMeta mbooksharp = (EnchantmentStorageMeta) booksharp.getItemMeta();
 		mbooksharp.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
 		booksharp.setItemMeta(mbooksharp);
-		return booksharp;
-	}
-
-	private static ItemStack initbookprotec() {
-		ItemStack bookprotec = new ItemStack(Material.ENCHANTED_BOOK);
+		
+		bookprotec = new ItemStack(Material.ENCHANTED_BOOK);
 		EnchantmentStorageMeta mbookprotec = (EnchantmentStorageMeta) bookprotec.getItemMeta();
 		mbookprotec.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
 		bookprotec.setItemMeta(mbookprotec);
-		return bookprotec;
 	}
 
 	RoleType rt;
