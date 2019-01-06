@@ -24,22 +24,17 @@ public class CommanduhcKit implements CommandExecutor {
 				sender.sendMessage(">>UHC §4Les Roles ne sont pas encore défini");
 				return false;
 			}
-
-		if (UHCMain.roles.isEmpty()) {
-			sender.sendMessage("You can't get your kit now");
-			return false;
+			
+			Player p = (Player) sender;
+	
+			p.getWorld().playSound(p.getLocation(), Sound.ANVIL_USE, 1F, 1F);
+	
+			if (UHCMain.roles.get(p).giveItem(p)) {
+				sender.sendMessage(ChatColor.GOLD + ">>UHC §4 Vous avez recu votre KIT avec succés !!!");
+			} else {
+				sender.sendMessage(ChatColor.GOLD + ">>UHC §4 Vous avez déjà recu votre KIT !!!");
+			}
 		}
-
-		Player p = (Player) sender;
-
-		p.getWorld().playSound(p.getLocation(), Sound.ANVIL_USE, 1F, 1F);
-
-		if (UHCMain.roles.get(p).giveItem(p)) {
-			sender.sendMessage(ChatColor.GOLD + ">>UHC §4 Vous avez recu votre KIT avec succés !!!");
-		} else {
-			sender.sendMessage(ChatColor.GOLD + ">>UHC §4 Vous avez déjà recu votre KIT !!!");
-		}
-
 		return true;
 	}
 }
