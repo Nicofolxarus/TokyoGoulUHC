@@ -1,6 +1,5 @@
 package fr.falkoyt.Event;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,9 +17,7 @@ public class StrengthNerf implements Listener {
 
 		if (!p.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE))
 			return;
-		Bukkit.getConsoleSender().sendMessage("Default damage: " + event.getDamage());
-		event.setDamage(event.getDamage() / 2.3 * 1.5);
-		Bukkit.getConsoleSender().sendMessage("Modify damage: " + event.getDamage());
 		
+		event.setDamage(event.getDamage() / 2.3 * 1.5);		
 	}
 }
